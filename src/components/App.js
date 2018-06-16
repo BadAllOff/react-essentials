@@ -1,5 +1,6 @@
 import React from 'react';
-import Article from './Article'
+// import Article from './Article'
+import ArticleList from './ArticleList'
 import articles from '../fixtures'
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
       <h1 className="App-header">
         Intro to React concepts.
       </h1>
-      <Article article={articles[0]}/>
+      <ArticleList articles={articles}/>
     </div>
   );
 }
