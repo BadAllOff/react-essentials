@@ -1,16 +1,33 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-function Article(props) {
-  const {article} = props
+class Article extends Component{
+  state = {
+    isOpen: true
+  }
 
-  const body = <p className="app-title">{article.text}</p>
-  return (
-    <div className="app">
-      <h3>{article.title}</h3>
-      {body}
-      creation date: {(new Date(article.date)).toDateString()}
-    </div>
-  );
+  render() {
+    const {article} = this.props
+    const body = this.state.isOpen && <p className="app-title">{article.text}</p>
+    return (
+      <div className="app">
+        <h3>
+          {article.title}
+          {/* handleClick.bind.this - DON"T do that */}
+          <button onClick={this.handleClick}>
+            {this.state.isOpen ? 'close' : 'open'}
+          </button>
+        </h3>
+        {body}
+        creation date: {(new Date(article.date)).toDateString()}
+      </div>
+    );
+  }
+  handleClick = () => {
+    console.log('---')
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
 }
 
 export default Article
