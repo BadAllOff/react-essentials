@@ -8,3 +8,4 @@ React essentials. Main concepts.
 3. State.
 4. Virtual DOM - the main algorithm React.js
 5. Displaying arrays, the meaning of the key attribute
+6. Designing components, working with CSS
