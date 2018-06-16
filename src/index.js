@@ -1,14 +1,25 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-function HelloWorld() {
+function Article() {
+  const body = <p className="app-title">Lorum Ipsum dolorum</p>
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Intro to React concepts.</h1>
-        </header>
+      <div className="app">
+        <h3>Article title</h3>
+        {body}
+        creation date: {(new Date()).toDateString()}
       </div>
     );
 }
 
-render(<HelloWorld />, document.getElementById('root'));
+function App() {
+  return (
+    <div>
+      <h1 className="App-header">
+        Intro to React concepts.
+      </h1>
+      <Article/>
+    </div>
+  );
+}
+render(<App />, document.getElementById('root'));
