@@ -15,3 +15,4 @@ React essentials. Main concepts.
 6. Designing components, working with CSS
 7. Life cycle of React-components
 8. Optimizing applications, shouldComponentUpdate, PureComponent
+9. Debugging React applications, immutable data

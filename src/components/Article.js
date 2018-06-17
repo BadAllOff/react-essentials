@@ -5,7 +5,7 @@
 // }
 // DON'T USE IT EVERYWHERE
 // can get several bugs which will be hard to find after
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 
 class Article extends PureComponent {
   constructor(props) {
