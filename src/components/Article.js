@@ -1,17 +1,22 @@
-import React, {Component} from 'react';
+// PureComponent differs from Component
+// has already implemented method
+// shouldComponentUpdate(nextProps, nextState) {
+//  return this.state.isOpen !== nextState.isOpen
+// }
+// DON'T USE IT EVERYWHERE
+// can get several bugs which will be hard to find after
+import React, {Component, PureComponent} from 'react';
 
-class Article extends Component {
+class Article extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      isOpen: props.defaultOpen
+      isOpen: props.defaultOpen,
+      count: 0
     }
   }
-
   // good place to make server requests
-  componentWillMount() {
-  }
-
+  componentWillMount() {}
   render() {
     const {article} = this.props
     const body = this.state.isOpen &&
@@ -19,8 +24,10 @@ class Article extends Component {
     return (
       <div className="card mx-auto" style={{width: '50%'}}>
         <div className='card-header'>
-          <h3>
+          <h3 onClick={this.incremetnCounter}>
             {article.title}
+            &nbsp;
+            <span className='badge badge-xs badge-success'>clicked: {this.state.count}</span>
             &nbsp;
             {/* handleClick.bind.this - DON"T do that */}
             <button onClick={this.handleClick} className='btn btn-info btn-xs'>
@@ -37,10 +44,14 @@ class Article extends Component {
       </div>
     );
   }
-
   handleClick = () => {
     this.setState({
       isOpen: !this.state.isOpen
+    })
+  }
+  incremetnCounter = () => {
+    this.setState({
+      count: this.state.count + 1
     })
   }
   // componentDidMount
@@ -49,7 +60,6 @@ class Article extends Component {
   // and more...
   componentDidMount() {
   }
-
   // componentWillReceiveProps
   // triggers ONLY if parent component changes and props have changed
   // nextProps - is new properties
@@ -63,34 +73,32 @@ class Article extends Component {
       isOpen: nextProps.defaultOpen
     })
   }
-
   // shouldComponentUpdate
+  // if class extends PureComponent, no need to implement this method
   // triggers everytime
+  // returns boolean to upgrade or not
   // helps to optimize our app
   // identifies if there is need to change component or not
-  shouldComponentUpdate(nextProps, nextState) {
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+    // dangerous use
+    // return this.state.isOpen !== nextState.isOpen
+  // }
 
   // componentWillUpdate
   // triggers everytime
   // warns us that now we will change component
   // here we can also react to any changes in state or props
   // render starts after this method
-  componentWillUpdate(nextProps, nextState) {
-  }
-
+  componentWillUpdate(nextProps, nextState) {}
   // componentDidUpdate(prevProps, PrevState)
   // current state and props will live in this.state & this.props
   // mostly it's used if we need to get info about components of REAL DOM
-  componentDidUpdate(prevProps, PrevState) {
-  }
-
+  componentDidUpdate(prevProps, PrevState) {}
   // componentWilllUnmount()
   // triggered before component deleted
   // great place to clean up subscriptions
   // maybe in real DOM states
   //  maybe in data set
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 }
 export default Article

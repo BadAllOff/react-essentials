@@ -14,3 +14,4 @@ React essentials. Main concepts.
 5. Displaying arrays, the meaning of the key attribute
 6. Designing components, working with CSS
 7. Life cycle of React-components
+8. Optimizing applications, shouldComponentUpdate, PureComponent
