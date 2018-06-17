@@ -10,16 +10,16 @@ import React, {PureComponent} from 'react';
 class Article extends PureComponent {
   constructor(props) {
     super(props)
+
     this.state = {
-      isOpen: props.defaultOpen,
       count: 0
     }
   }
   // good place to make server requests
   componentWillMount() {}
   render() {
-    const {article} = this.props
-    const body = this.state.isOpen &&
+    const {article, isOpen, onButtonClick} = this.props
+    const body = isOpen &&
       <p className="card-text">{article.text}</p>
     return (
       <div className="card mx-auto" style={{width: '50%'}}>
@@ -30,8 +30,8 @@ class Article extends PureComponent {
             <span className='badge badge-xs badge-success'>clicked: {this.state.count}</span>
             &nbsp;
             {/* handleClick.bind.this - DON"T do that */}
-            <button onClick={this.handleClick} className='btn btn-info btn-xs'>
-              {this.state.isOpen ? 'close' : 'open'}
+            <button onClick={onButtonClick} className='btn btn-info btn-xs'>
+              {isOpen ? 'close' : 'open'}
             </button>
           </h3>
         </div>
@@ -45,9 +45,9 @@ class Article extends PureComponent {
     );
   }
   handleClick = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    // this.setState({
+    //   isOpen: !this.state.isOpen
+    // })
   }
   incremetnCounter = () => {
     this.setState({
@@ -68,10 +68,11 @@ class Article extends PureComponent {
   // Or, if we bind our state on properties, and now
   // we have to watch changes in properties and maybe
   // to keep state in needed condition
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-      isOpen: nextProps.defaultOpen
-    })
+  //   if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
+  //     isOpen: nextProps.defaultOpen
+  //   })
   }
   // shouldComponentUpdate
   // if class extends PureComponent, no need to implement this method

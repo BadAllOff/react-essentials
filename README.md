@@ -16,3 +16,4 @@ React essentials. Main concepts.
 7. Life cycle of React-components
 8. Optimizing applications, shouldComponentUpdate, PureComponent
 9. Debugging React applications, immutable data
+10. Reverse data flow, state-lifting (concept of redux, mobx, rely)
