@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
 
-class Article extends Component{
-  state = {
-    isOpen: true
+class Article extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isOpen: props.defaultOpen
+    }
+  }
+
+  // good place to make server requests
+  componentWillMount() {
   }
 
   render() {
     const {article} = this.props
-    const body = this.state.isOpen && <p className="card-text">{article.text}</p>
+    const body = this.state.isOpen &&
+      <p className="card-text">{article.text}</p>
     return (
-      <div className="card mx-auto" style={{width:'50%'}}>
+      <div className="card mx-auto" style={{width: '50%'}}>
         <div className='card-header'>
           <h3>
             {article.title}
@@ -29,11 +37,60 @@ class Article extends Component{
       </div>
     );
   }
+
   handleClick = () => {
     this.setState({
       isOpen: !this.state.isOpen
     })
   }
-}
+  // componentDidMount
+  // we can get info about size and placement of component
+  // subscribe to listeners or to data changes
+  // and more...
+  componentDidMount() {
+  }
 
+  // componentWillReceiveProps
+  // triggers ONLY if parent component changes and props have changed
+  // nextProps - is new properties
+  // It has use in case if we have new data set and
+  // we need to react to it.
+  // Or, if we bind our state on properties, and now
+  // we have to watch changes in properties and maybe
+  // to keep state in needed condition
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
+      isOpen: nextProps.defaultOpen
+    })
+  }
+
+  // shouldComponentUpdate
+  // triggers everytime
+  // helps to optimize our app
+  // identifies if there is need to change component or not
+  shouldComponentUpdate(nextProps, nextState) {
+  }
+
+  // componentWillUpdate
+  // triggers everytime
+  // warns us that now we will change component
+  // here we can also react to any changes in state or props
+  // render starts after this method
+  componentWillUpdate(nextProps, nextState) {
+  }
+
+  // componentDidUpdate(prevProps, PrevState)
+  // current state and props will live in this.state & this.props
+  // mostly it's used if we need to get info about components of REAL DOM
+  componentDidUpdate(prevProps, PrevState) {
+  }
+
+  // componentWilllUnmount()
+  // triggered before component deleted
+  // great place to clean up subscriptions
+  // maybe in real DOM states
+  //  maybe in data set
+  componentWillUnmount() {
+  }
+}
 export default Article
